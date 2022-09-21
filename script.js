@@ -13,29 +13,32 @@ const regexSubtract = /\-/g
 const regexMultiply = /\*/g
 const regexDivide = /\//g
 
+//Calculator functions:
+
+let myExpression = '';
+
 function printNumOnDisplay() {
+    myExpression += this.value
     if (para.lastChild && para.lastChild.className === 'num') {
         para.lastChild.textContent += this.value
     } else {
         const span = document.createElement('span');
         span.setAttribute('class', 'num');
-        console.log(this.value)
         span.textContent += ' ' + this.value;
         para.appendChild(span);
-        console.log(para.lastChild.className)
+        console.log(myExpression);
     }
-};
+}
 
 function printOperatorOnDisplay() {
+    myExpression += this.name
     if (para.lastChild && para.lastChild.className !== 'Operator') {
         const span = document.createElement('span');
         span.setAttribute('class', 'Operator');
-        console.log(this.value)
         span.textContent += ' ' + this.name;
         para.appendChild(span);
-        console.log(para.lastChild.className)
     }
-    
+    console.log(myExpression);
 }
 
 function clearDisplay() {
@@ -48,6 +51,8 @@ function submitExpression() {
     const myExpression = para.querySelectorAll('span.char');
     return operate()
 }
+
+//Math functions:
 
 const add = function(aBC) {
 	return aBC.reduce((acc, n) => acc + n);
