@@ -29,7 +29,7 @@ function printNumOnDisplay() {
     } else {
         const span = document.createElement('span');
         span.setAttribute('class', 'num');
-        span.textContent += ' ' + this.value;
+        span.textContent += this.value;
         para.appendChild(span);
         console.log(myExpression);
     }
@@ -41,7 +41,7 @@ function printOperatorOnDisplay() {
     if (para.lastChild && para.lastChild.className !== 'Operator') {
         const span = document.createElement('span');
         span.setAttribute('class', 'Operator');
-        span.textContent += ' ' + this.name;
+        span.textContent += ` ${this.value} `;
         para.appendChild(span);
     }
     console.log(myExpression);
@@ -49,35 +49,54 @@ function printOperatorOnDisplay() {
 
 
 function clearDisplay() {
-    while (para.hasChildNodes()) {
-        para.removeChild(para.firstChild)
-    }
+    while (para.hasChildNodes()) para.removeChild(para.firstChild)
     myExpression = [];
 }
 
+
 function operate() {
+    
     for (let i = 0; i < myExpression.length; i++) {
-        if (regexMultiply.test(myExpression[i]) || regexDivide.test(myExpression[i])) {
-            console.log(myExpression)
-            console.log(myExpression[i](myExpression[i-1], myExpression[i+1]))
-            return myExpression[i](myExpression[i-1], myExpression[i+1])
+
+            switch (myExpression[i].charCodeAt(0)) {
+
+                case 42:
+                    para.textContent += multiply(+myExpression[i-1], +myExpression[i+1])
+                    break;
+
+                case 47:
+                    para.textContent +=divide(+myExpression[i-1], +myExpression[i+1])
+                    break;
+            
+                default:
+                    break;
         }
     }
     
     for (let i = 0; i < myExpression.length; i++) {
-        if (myExpression ===  add || myExpression === subtract) {
-            myExpression[i]
-            console.log(myExpression[i])
-            console.log(myExpression[i](myExpression[i-1], myExpression[i+1]))
-            return myExpression[i](myExpression[i-1], myExpression[i+1])
+
+            switch (myExpression[i].charCodeAt(0)) {
+    
+                case 43:
+                    para.textContent += add(+myExpression[i-1], +myExpression[i+1])
+                    break;
+                    
+                    case 45:
+                        para.textContent += subtract(+myExpression[i-1], +myExpression[i+1])
+                    break;
+            
+                default:
+                    break;
         }
-    }     
+        
+    }
 }
 
 
 //Math functions:
 
 const add = function(a, b) {
+    console.log(a + b)
 	return a + b;
 };
 
