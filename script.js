@@ -2,6 +2,7 @@ const display = document.querySelector('div.display');
 const para = document.createElement('p');
 para.setAttribute('class', 'text-box'); 
 display.appendChild(para);
+
 const btnReturn = document.querySelector('button.return')
 const btnClear = document.querySelector('button.clear')
 
@@ -13,12 +14,16 @@ const regexSubtract = /\-/g
 const regexMultiply = /\*/g
 const regexDivide = /\//g
 
+
 //Calculator functions:
 
-let myExpression = '';
+
+let myExpression = [];
+
 
 function printNumOnDisplay() {
-    myExpression += this.value
+    // If previous entry us a number, add number as string
+    myExpression[myExpression.length] = this.value
     if (para.lastChild && para.lastChild.className === 'num') {
         para.lastChild.textContent += this.value
     } else {
@@ -30,8 +35,9 @@ function printNumOnDisplay() {
     }
 }
 
+
 function printOperatorOnDisplay() {
-    myExpression += this.name
+    myExpression[myExpression.length] = this.value
     if (para.lastChild && para.lastChild.className !== 'Operator') {
         const span = document.createElement('span');
         span.setAttribute('class', 'Operator');
@@ -41,48 +47,56 @@ function printOperatorOnDisplay() {
     console.log(myExpression);
 }
 
+
 function clearDisplay() {
     while (para.hasChildNodes()) {
         para.removeChild(para.firstChild)
     }
-};
-
-function submitExpression() {
-    const myExpression = para.querySelectorAll('span.char');
-    return operate()
+    myExpression = [];
 }
+
+function operate() {
+    for (let i = 0; i < myExpression.length; i++) {
+        if (regexMultiply.test(myExpression[i]) || regexDivide.test(myExpression[i])) {
+            console.log(myExpression)
+            console.log(myExpression[i](myExpression[i-1], myExpression[i+1]))
+            return myExpression[i](myExpression[i-1], myExpression[i+1])
+        }
+    }
+    
+    for (let i = 0; i < myExpression.length; i++) {
+        if (myExpression ===  add || myExpression === subtract) {
+            myExpression[i]
+            console.log(myExpression[i])
+            console.log(myExpression[i](myExpression[i-1], myExpression[i+1]))
+            return myExpression[i](myExpression[i-1], myExpression[i+1])
+        }
+    }     
+}
+
 
 //Math functions:
 
-const add = function(aBC) {
-	return aBC.reduce((acc, n) => acc + n);
+const add = function(a, b) {
+	return a + b;
 };
 
-const subtract = function(aBC) {
-	return aBC.reduce((acc, n) => acc - n);
+
+const subtract = function(a, b) {
+	return a - b;
 };
 
-const multiply = function(aBC) {
-    return aBC.reduce((acc, n) => acc * n);
+
+const multiply = function(a, b) {
+    return a * b;
   };
 
-const divide = function(aBC) {
-    return aBC.reduce((acc, n) => acc / n);
-}
 
-function operate(expression) {
-    for (let i = 0; i < expression.length; i++) {
-        if (regexMultiply.test(expression[i])) {
-    
-        } else if (regexDivide.test(expression[i])) {
+const divide = function(a, b) {
+    return a / b;
+};
 
-        } else if (regexAdd.test(expression[i])) {
 
-        } else if (regexSubtract.test(expression[i])) {
-        
-        }
-    }
-}
 
 
 operatorButtons.forEach( function (button) {
@@ -91,5 +105,7 @@ operatorButtons.forEach( function (button) {
 numberButtons.forEach( function (button) {
     button.addEventListener('click', printNumOnDisplay);
 });
+
+btnReturn.addEventListener('click', operate)
 
 btnClear.addEventListener('click', clearDisplay)
