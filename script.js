@@ -22,7 +22,7 @@ let myExpression = [];
 
 
 function printNumOnDisplay() {
-    // If previous entry us a number, add number as string
+    // If previous entry is a number, add number as string
     myExpression[myExpression.length] = this.value
     if (para.lastChild && para.lastChild.className === 'num') {
         para.lastChild.textContent += this.value
@@ -47,6 +47,58 @@ function printOperatorOnDisplay() {
     console.log(myExpression);
 }
 
+function operate() {
+    let result = 0;
+
+    for (let i = 0; i < myExpression.length; i++) {
+
+        if (myExpression.some(char => char === '*')) {
+
+            result = multiply(+myExpression[i-1], +myExpression[i+1]);
+            console.log(result);
+            console.log(myExpression[i]);
+            para.textContent += result;
+            console.log(myExpression);
+            myExpression.splice(i-1, 3, result);
+
+        } else if (myExpression.some(char => char === '/')) {
+
+            result = divide(+myExpression[i-1], +myExpression[i+1]);
+            console.log(result);
+            para.textContent += result;
+            myExpression.splice(i-1, 3, result);
+
+        }
+
+    }
+    for (let i = 0; i < myExpression.length; i++) {
+
+        if (myExpression.some(char => char === '+')) {
+
+            result = add(+myExpression[i-1], +myExpression[i+1]);
+            console.log(result);
+            console.log(myExpression[i]);
+            para.textContent += result;
+            console.log(myExpression);
+            myExpression.splice(i-1, 3, result);
+
+        } else if (myExpression.some(char => char === '-')) {
+
+            console.log(subtract(+myExpression[i-1], +myExpression[i+1]))
+            result = subtract(+myExpression[i-1], +myExpression[i+1]);
+            console.log(result);
+            para.textContent += result;
+            myExpression.splice(i-1, 3, result);
+
+        }
+
+    }
+
+}
+
+function checkOperator (array, value) {
+    return array.find(arrVal => value === arrVal)
+}
 
 function clearDisplay() {
     while (para.hasChildNodes()) para.removeChild(para.firstChild)
@@ -54,49 +106,11 @@ function clearDisplay() {
 }
 
 
-function operate() {
-    
-    for (let i = 0; i < myExpression.length; i++) {
-
-            switch (myExpression[i].charCodeAt(0)) {
-
-                case 42:
-                    para.textContent += multiply(+myExpression[i-1], +myExpression[i+1])
-                    break;
-
-                case 47:
-                    para.textContent +=divide(+myExpression[i-1], +myExpression[i+1])
-                    break;
-            
-                default:
-                    break;
-        }
-    }
-    
-    for (let i = 0; i < myExpression.length; i++) {
-
-            switch (myExpression[i].charCodeAt(0)) {
-    
-                case 43:
-                    para.textContent += add(+myExpression[i-1], +myExpression[i+1])
-                    break;
-                    
-                    case 45:
-                        para.textContent += subtract(+myExpression[i-1], +myExpression[i+1])
-                    break;
-            
-                default:
-                    break;
-        }
-        
-    }
-}
 
 
 //Math functions:
 
 const add = function(a, b) {
-    console.log(a + b)
 	return a + b;
 };
 
@@ -124,6 +138,7 @@ operatorButtons.forEach( function (button) {
 numberButtons.forEach( function (button) {
     button.addEventListener('click', printNumOnDisplay);
 });
+
 
 btnReturn.addEventListener('click', operate)
 
