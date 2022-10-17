@@ -2,12 +2,33 @@ const display = document.querySelector('div.display');
 const para = document.createElement('p');
 para.setAttribute('class', 'text-box'); 
 display.appendChild(para);
-
-const btnReturn = document.querySelector('button.return')
-const btnClear = document.querySelector('button.clear')
-
-const operatorButtons = document.querySelectorAll('.operator-buttons button');
-const numberButtons = document.querySelectorAll('.number-buttons button');
+let myExpression = [];
+document.addEventListener('keydown', function(e) {
+    console.log(e)
+    switch (e.key) {
+        case '=':
+            operate(myExpression)
+            break;
+        case '+':
+            myExpression.push(e.key);
+            break;
+        case '-':
+            myExpression.push(e.key);
+            break;
+        case '*':
+            myExpression.push(e.key);
+            break;
+        case '+':
+            myExpression.push(e.key);
+            break;
+        case 'Backspace':
+        clearDisplay();
+        break;
+    }});
+const btnClear = document.querySelector('button.clear').addEventListener('click', clearDisplay);
+const btn = document.querySelectorAll('button.btn').forEach( function (button) {
+    button.addEventListener('click', registerBtnValue);
+});
 
 const regexAdd = /\+/g
 const regexSubtract = /\-/g
@@ -18,8 +39,32 @@ const regexDivide = /\//g
 //Calculator functions:
 
 
-let myExpression = [];
 
+
+function registerBtnValue() {
+    console.log(this.value)
+    switch (this.value) {
+        case '=':
+            operate(myExpression)
+            break;
+        case '+':
+            myExpression += this.value;
+            break;
+        case '-':
+            myExpression += this.value;
+            break;
+        case '*':
+            myExpression += this.value;
+            break;
+        case '+':
+            myExpression += this.value;
+            break;
+        case 'Backspace':
+            clearDisplay();
+            break;
+    }
+    
+}
 
 function printNumOnDisplay() {
     // If previous entry is a number, add number as string
@@ -128,18 +173,3 @@ const multiply = function(a, b) {
 const divide = function(a, b) {
     return a / b;
 };
-
-
-
-
-operatorButtons.forEach( function (button) {
-    button.addEventListener('click', printOperatorOnDisplay);
-});
-numberButtons.forEach( function (button) {
-    button.addEventListener('click', printNumOnDisplay);
-});
-
-
-btnReturn.addEventListener('click', operate)
-
-btnClear.addEventListener('click', clearDisplay)
