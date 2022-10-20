@@ -1,5 +1,12 @@
-const myExp = ['1', '/', '2', '-', '8', '*', '3', '-', '3'];
-const exp = ['1', '+', '3']
+const myExp = [];
+let display = document.querySelector('.display')
+//document.addEventListener('keydown', e => {
+//    console.log(e.key)
+//})
+document.addEventListener('click', e => {
+    myExp.push(e.target.value);
+    display.textContent = myExp;
+})
 
 function add(a, b) {
     return a + b;
