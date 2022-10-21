@@ -4,8 +4,13 @@ let display = document.querySelector('.display')
 //    console.log(e.key)
 //})
 document.addEventListener('click', e => {
-    myExp.push(e.target.value);
-    display.textContent = myExp;
+    if ( isNaN(+myExp[myExp.length - 1]) || isNaN(e.target.value) ) {
+       myExp.push(e.target.value); 
+    } else {
+        myExp[myExp.length - 1] += e.target.value;
+    }
+    
+    display.textContent = myExp.join(' ');
 })
 
 function add(a, b) {
