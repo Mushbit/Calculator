@@ -4,8 +4,8 @@ let display = document.querySelector('.display')
 //document.addEventListener('keydown', e => {
 //    console.log(e.key)
 //})
-const button = document.querySelectorAll('.btn');
-button.forEach(btn => {
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(btn => {
 
     btn.addEventListener('click', e => {
 
@@ -15,12 +15,15 @@ button.forEach(btn => {
             myExp[myExp.length - 1] += e.target.value;
         }
         
-        display.textContent = myExp.join(' ');
+        refreshDisplay()
     })
 })
 
 const buttonClear = document.querySelector('.clearBtn');
 buttonClear.addEventListener('click', clear)
+
+const buttonReturn = document.querySelector('.returnBtn');
+buttonReturn.addEventListener('click', operate)
 
 function add(a, b) {
     return a + b;
@@ -38,59 +41,64 @@ function divide(a, b) {
     return a / b;
 }
 
-function checkAddSub(arr) {
-    return arr.some(el => el === '+' || el === '-' );
+function checkAddSub() {
+    return myExp.some(el => el === '+' || el === '-' );
 }
 
-function checkMulDiv(arr) {
-    return arr.some(el => el === '*' || el === '/' )
+function checkMulDiv() {
+    return myExp.some(el => el === '*' || el === '/' )
 }
 
-function findAddSub(arr) {
-    return arr.findIndex(el => el === '+' || el === '-')
+function findAddSub() {
+    return myExp.findIndex(el => el === '+' || el === '-')
 }
 
-function findMulDiv(arr) {
-    return arr.findIndex(el => el === '*' || el === '/')
+function findMulDiv() {
+    return myExp.findIndex(el => el === '*' || el === '/')
 }
 
-function operate(arr) {
+function refreshDisplay() {
+    display.textContent = myExp.join(' ');
+}
+
+function operate() {
 
     let i = 0;
     let result = 0;
 
-    while (checkMulDiv(arr)) {
-        i = findMulDiv(arr);
-        if (arr[i] === '*') {
-            result = multiply(+arr[i-1], +arr[i+1])
-            arr.splice(i-1, 3, result);
-            console.log(arr)
+    while (checkMulDiv()) {
+        i = findMulDiv();
+        if (myExp[i] === '*') {
+            result = multiply(+myExp[i-1], +myExp[i+1])
+            myExp.splice(i-1, 3, result);
+            console.log(myExp)
         } else {
-            result = divide(+arr[i-1], +arr[i+1])
-            arr.splice(i-1, 3, result); 
-            console.log(arr)
+            result = divide(+myExp[i-1], +myExp[i+1])
+            myExp.splice(i-1, 3, result); 
+            console.log(myExp)
         }
     }
     
-    while (checkAddSub(arr)) {
-        i = findAddSub(arr);
-        if (arr[i] === '+') {
-            result = add(+arr[i-1], +arr[i+1])
+    while (checkAddSub()) {
+        i = findAddSub();
+        if (myExp[i] === '+') {
+            result = add(+myExp[i-1], +myExp[i+1])
             console.log(result)
-            arr.splice(i-1, 3, result);
-            console.log(arr)
+            myExp.splice(i-1, 3, result);
+            console.log(myExp)
         } else {
-            result = subtract(+arr[i-1], +arr[i+1])
+            result = subtract(+myExp[i-1], +myExp[i+1])
             console.log(result)
-            arr.splice(i-1, 3, result); 
-            console.log(arr)
+            myExp.splice(i-1, 3, result); 
+            console.log(myExp)
         }
     }
-        
+    
+    refreshDisplay()
 }
 
 function clear() {
     e => console.log('Im working')
     myExp.splice(0, myExp.length);
-    display.textContent = myExp;
+    refreshDisplay()
 }
