@@ -1,17 +1,26 @@
 const myExp = [];
+
 let display = document.querySelector('.display')
 //document.addEventListener('keydown', e => {
 //    console.log(e.key)
 //})
-document.addEventListener('click', e => {
-    if ( isNaN(+myExp[myExp.length - 1]) || isNaN(e.target.value) ) {
-       myExp.push(e.target.value); 
-    } else {
-        myExp[myExp.length - 1] += e.target.value;
-    }
-    
-    display.textContent = myExp.join(' ');
+const button = document.querySelectorAll('.btn');
+button.forEach(btn => {
+
+    btn.addEventListener('click', e => {
+
+        if ( isNaN(+myExp[myExp.length - 1]) || isNaN(e.target.value) ) {
+           myExp.push(e.target.value); 
+        } else {
+            myExp[myExp.length - 1] += e.target.value;
+        }
+        
+        display.textContent = myExp.join(' ');
+    })
 })
+
+const buttonClear = document.querySelector('.clearBtn');
+buttonClear.addEventListener('click', clear)
 
 function add(a, b) {
     return a + b;
@@ -78,4 +87,10 @@ function operate(arr) {
         }
     }
         
+}
+
+function clear() {
+    e => console.log('Im working')
+    myExp.splice(0, myExp.length);
+    display.textContent = myExp;
 }
