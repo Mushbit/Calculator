@@ -106,6 +106,6 @@ function operate() {
 
 function clear() {
     e => console.log('Im working')
-    myExp.splice(0, myExp.length);
+    myExp.splice(0, myExp.length,);
     refreshDisplay()
 }
