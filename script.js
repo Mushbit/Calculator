@@ -8,10 +8,13 @@ const buttons = document.querySelectorAll('.btn');
 buttons.forEach(btn => {
 
     btn.addEventListener('click', e => {
-
-        if ( isNaN(+myExp[myExp.length - 1]) || isNaN(e.target.value) ) {
-           myExp.push(e.target.value); 
-        } else {
+        //if (Last element = operator || button pressed = operator)
+        if ( isNaN(+myExp[myExp.length - 1]) || isNaN(e.target.value)) {
+            if (!(myExp.length === 0 && isNaN(e.target.value))) myExp.push(e.target.value);
+        } else if (typeof(myExp[0]) === 'number'){
+            clear();
+            myExp.push(e.target.value);
+        } else {;
             myExp[myExp.length - 1] += e.target.value;
         }
         
@@ -24,6 +27,10 @@ buttonClear.addEventListener('click', clear)
 
 const buttonReturn = document.querySelector('.returnBtn');
 buttonReturn.addEventListener('click', operate)
+
+function checkOperator() {
+    return isNaN(+myExp[myExp.length - 1]);
+}
 
 function add(a, b) {
     return a + b;
