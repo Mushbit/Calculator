@@ -9,8 +9,10 @@ buttons.forEach(btn => {
 
     btn.addEventListener('click', e => {
         //if (Last element = operator || button pressed = operator)
-        if ( isNaN(+myExp[myExp.length - 1]) || isNaN(e.target.value)) {
-            if (!(myExp.length === 0 && isNaN(e.target.value))) myExp.push(e.target.value);
+        if ( lastInputIsOperator() || currentInputIsOperator(e)) {
+            if (!(myExp.length === 0 && currentInputIsOperator(e))) {
+                myExp.push(e.target.value)
+            }
         } else if (typeof(myExp[0]) === 'number'){
             clear();
             myExp.push(e.target.value);
@@ -19,7 +21,7 @@ buttons.forEach(btn => {
         }
         
         refreshDisplay()
-    })
+})
 })
 
 const buttonClear = document.querySelector('.clearBtn');
@@ -28,10 +30,13 @@ buttonClear.addEventListener('click', clear)
 const buttonReturn = document.querySelector('.returnBtn');
 buttonReturn.addEventListener('click', operate)
 
-function checkOperator() {
+function lastInputIsOperator() {
     return isNaN(+myExp[myExp.length - 1]);
 }
 
+function currentInputIsOperator(e) {
+    return isNaN(e.target.value);
+}
 function add(a, b) {
     return a + b;
 }
