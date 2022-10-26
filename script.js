@@ -6,22 +6,26 @@ let display = document.querySelector('.display')
 //})
 const buttons = document.querySelectorAll('.btn');
 buttons.forEach(btn => {
-
     btn.addEventListener('click', e => {
-        //if (Last element = operator || button pressed = operator)
-        if ( lastInputIsOperator() || currentInputIsOperator(e)) {
-            if (!(myExp.length === 0 && currentInputIsOperator(e))) {
-                myExp.push(e.target.value)
-            }
-        } else if (typeof(myExp[0]) === 'number'){
+        console.log(!(lastInputIsNaN(1)));
+        if (e.target.value === '-' && !(lastInputIsNaN(2))) {
+            console.log('hoi');
+            myExp.push(e.target.value);
+        } else if ( lastInputIsNaN(1) || currentInputIsOperator(e)) {
+            if (!(currentInputIsOperator(e) && lastInputIsNaN(1))) {
+                myExp.push(e.target.value) 
+             }
+        } else if (typeof(myExp[0]) === 'number' && myExp[1] === undefined){
             clear();
             myExp.push(e.target.value);
-        } else {;
+        } else {
             myExp[myExp.length - 1] += e.target.value;
         }
         
         refreshDisplay()
-})
+        console.log(myExp)
+
+    })
 })
 
 const buttonClear = document.querySelector('.clearBtn');
@@ -30,8 +34,8 @@ buttonClear.addEventListener('click', clear)
 const buttonReturn = document.querySelector('.returnBtn');
 buttonReturn.addEventListener('click', operate)
 
-function lastInputIsOperator() {
-    return isNaN(+myExp[myExp.length - 1]);
+function lastInputIsNaN(n) {
+    return isNaN(+myExp[myExp.length - n]);
 }
 
 function currentInputIsOperator(e) {
@@ -58,15 +62,15 @@ function checkAddSub() {
 }
 
 function checkMulDiv() {
-    return myExp.some(el => el === '*' || el === '/' )
+    return myExp.some(el => el === '*' || el === '/' );
 }
 
 function findAddSub() {
-    return myExp.findIndex(el => el === '+' || el === '-')
+    return myExp.findIndex(el => el === '+' || el === '-');
 }
 
 function findMulDiv() {
-    return myExp.findIndex(el => el === '*' || el === '/')
+    return myExp.findIndex(el => el === '*' || el === '/');
 }
 
 function refreshDisplay() {
@@ -100,7 +104,6 @@ function operate() {
             console.log(myExp)
         } else {
             result = subtract(+myExp[i-1], +myExp[i+1])
-            console.log(result)
             myExp.splice(i-1, 3, result); 
             console.log(myExp)
         }
