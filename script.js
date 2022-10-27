@@ -1,4 +1,4 @@
-const myExp = [];
+const myExp = [0];
 
 let display = document.querySelector('.display')
 //document.addEventListener('keydown', e => {
@@ -7,14 +7,17 @@ let display = document.querySelector('.display')
 const buttons = document.querySelectorAll('.btn');
 buttons.forEach(btn => {
     btn.addEventListener('click', e => {
-        console.log(!(lastInputIsNaN(1)));
-        if (e.target.value === '-' && !(lastInputIsNaN(2))) {
-            console.log('hoi');
+        console.log(e.target.value === '-')
+        console.log(!(lastInputIsNaN(2)))
+        console.log(myExp.length)
+        if (e.target.value === '-' && (!(lastInputIsNaN(2)) || myExp.length === 0)) {
             myExp.push(e.target.value);
+        } else if (myExp[myExp.length - 1] === '-' && !(currentInputIsOperator(e)) && lastInputIsNaN(2)) {
+            myExp[myExp.length - 1] += e.target.value;
         } else if ( lastInputIsNaN(1) || currentInputIsOperator(e)) {
             if (!(currentInputIsOperator(e) && lastInputIsNaN(1))) {
                 myExp.push(e.target.value) 
-             }
+            }
         } else if (typeof(myExp[0]) === 'number' && myExp[1] === undefined){
             clear();
             myExp.push(e.target.value);
