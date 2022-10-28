@@ -10,12 +10,16 @@ buttons.forEach(btn => {
         console.log(e.target.value === '-')
         console.log(!(lastInputIsNaN(2)))
         console.log(myExp.length)
-        if (e.target.value === '-' && (!(lastInputIsNaN(2)) || myExp.length === 0)) {
+        if (e.target.value === '.' && myExp.length === 0) {
+            myExp.push('0' + e.target.value)
+        } else if (e.target.value === '.' && !(lastInputIsNaN(1)) && !(myExp[myExp.length -1].includes('.'))) {
+            myExp[myExp.length - 1] += e.target.value;
+        } else if (e.target.value === '-' && (!(lastInputIsNaN(2)) || myExp.length === 0)) {
             myExp.push(e.target.value);
         } else if (myExp[myExp.length - 1] === '-' && !(currentInputIsOperator(e)) && lastInputIsNaN(2)) {
             myExp[myExp.length - 1] += e.target.value;
         } else if ( lastInputIsNaN(1) || currentInputIsOperator(e)) {
-            if (!(currentInputIsOperator(e) && lastInputIsNaN(1))) {
+            if (!(currentInputIsOperator(e) && lastInputIsNaN(1)) && e.target.value != '.') {
                 myExp.push(e.target.value) 
             }
         } else if (typeof(myExp[0]) === 'number' && myExp[1] === undefined){
@@ -30,6 +34,7 @@ buttons.forEach(btn => {
 
     })
 })
+
 
 const buttonClear = document.querySelector('.clearBtn');
 buttonClear.addEventListener('click', clear)
