@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: flex;
+    border: 1px red solid;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    margin: 30px;
+    height: 300px;
+    gap: 30px;
+    
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+}
+
+.display {
+    display: flex;
+    border: 1px red solid;
+    align-items: center;
+    height: 60px;
+    width: 260px;
+    padding-left: 10px;
+}
+
+.clearBtn {
+
+}
+
+.mid {
+    display: flex;
+    gap: 0px;
+}
+
+.number {
+    display: flex;
+    border: 1px red solid;
+    flex-wrap: wrap;
+    gap: 8px;
+    height: 200px;
+    width: 150px;
+}
+
+.operator {
+    display: flex;
+    border: 1px red solid;
+    flex-wrap: wrap;
+
+    gap: 8px;
+    height: 200px;
+    width: 100px;
+}
+
+.btn,
+.clearBtn,
+.returnBtn,
+.fillBtn {
+    display: block;
+    height: 40px;
+    width:  40px;
+}

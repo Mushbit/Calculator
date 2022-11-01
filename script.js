@@ -19,11 +19,9 @@ buttons.forEach(btn => {
         } else if (myExp[myExp.length - 1] === '-' && !(currentInputIsOperator(e)) && lastInputIsNaN(2)) {
             myExp[myExp.length - 1] += e.target.value;
         } else if ( lastInputIsNaN(1) || currentInputIsOperator(e)) {
-            if (!(currentInputIsOperator(e) && lastInputIsNaN(1)) && e.target.value != '.') {
-                myExp.push(e.target.value) 
-            }
+            if (!(currentInputIsOperator(e) && lastInputIsNaN(1)) && e.target.value != '.') myExp.push(e.target.value)
         } else if (typeof(myExp[0]) === 'number' && myExp[1] === undefined){
-            clear();
+            allClear();
             myExp.push(e.target.value);
         } else {
             myExp[myExp.length - 1] += e.target.value;
@@ -35,6 +33,9 @@ buttons.forEach(btn => {
     })
 })
 
+
+const buttonAllClear = document.querySelector('.allClearBtn');
+buttonAllClear.addEventListener('click', allClear)
 
 const buttonClear = document.querySelector('.clearBtn');
 buttonClear.addEventListener('click', clear)
@@ -107,7 +108,6 @@ function operate() {
         i = findAddSub();
         if (myExp[i] === '+') {
             result = add(+myExp[i-1], +myExp[i+1])
-            console.log(result)
             myExp.splice(i-1, 3, result);
             console.log(myExp)
         } else {
@@ -120,8 +120,16 @@ function operate() {
     refreshDisplay()
 }
 
-function clear() {
-    e => console.log('Im working')
+function allClear() {
     myExp.splice(0, myExp.length,);
+    refreshDisplay()
+}
+function clear() {
+    if (myExp[myExp.length -1] === '' || typeof myExp[myExp.length -1] === 'number') {
+        myExp.pop()   
+        myExp[myExp.length -1] = myExp[myExp.length -1].substring(0, myExp[myExp.length -1].length -1);
+    } else {
+        myExp[myExp.length -1] = myExp[myExp.length -1].substring(0, myExp[myExp.length -1].length -1);
+    }
     refreshDisplay()
 }
