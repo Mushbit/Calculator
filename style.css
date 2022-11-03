@@ -1,7 +1,7 @@
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -20,18 +20,17 @@ body {
 .container {
     background-color: #272727;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     padding: 30px;
     margin: 20px;
     border-radius: 15px;
     box-shadow: 20px 20px black;
-    
+    max-width: 400px;
 }
 
 .top {
     display: flex;
-    flex: 0 0 auto;
-    flex-direction: row;
+    flex: 1;
     margin-bottom: 20px;
 }
 
@@ -49,40 +48,18 @@ body {
     font-size: 24px;
     font-weight: 600;
 }
-.functions {
-
+.numPad {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-
-    width: 300px;
-}
-
-.mid {
-    display: flex;
+    flex-direction: column;
     gap: 12px;
     margin-top: 12px;
 }
-
-.number {
+.numPad > * {
     display: flex;
-
-    flex-wrap: wrap;
-    gap: 12px;
-
-    max-width: 222px;
-}
-
-.operator {
-    display: flex;
-
-    flex-direction: column;
     gap: 12px;
 }
 
-.functions button,
-.mid button {
-
+.numPad > * button {
     background-color: #545454;
     color: #ffffff;
     cursor: pointer;
@@ -93,11 +70,13 @@ body {
 }
 
 
-.mid button:hover {
+.padRow2 button:hover,
+.padRow3 button:hover,
+.padRow4 button:hover {
     background-color: #3b3b3b;
 }
 
-.functions button:hover {
+.padRow1 button:hover {
     background-color: #101010;
 
 }
@@ -108,8 +87,7 @@ body {
     transform: translate(1.5px, 1.5px);
 }
 
-.functions button,
-.mid button {
+.numPad > * button {
 
     width: 66px;
     height: 30px;
@@ -128,6 +106,6 @@ button.returnBtn:hover {
     background-color: rgb(154, 81, 36);
     
 }
-.functions button {
+.padRow1 button {
     background-color: #1b1b1b;
 }
