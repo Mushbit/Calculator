@@ -41,7 +41,10 @@ const buttonClear = document.querySelector('.clearBtn');
 buttonClear.addEventListener('click', clear)
 
 const buttonReturn = document.querySelector('.returnBtn');
-buttonReturn.addEventListener('click', operate)
+buttonReturn.addEventListener('click',  () => {
+    if (!(lastInputIsNaN(1))) operate()
+})
+
 
 function lastInputIsNaN(n) {
     return isNaN(+myExp[myExp.length - n]);
@@ -125,9 +128,11 @@ function allClear() {
     refreshDisplay()
 }
 function clear() {
-    if (myExp[myExp.length -1] === '' || typeof myExp[myExp.length -1] === 'number') {
+    if (myExp[myExp.length -1] === '') {
         myExp.pop()   
         myExp[myExp.length -1] = myExp[myExp.length -1].substring(0, myExp[myExp.length -1].length -1);
+    } else if (typeof myExp[myExp.length -1] === 'number') {
+        myExp.pop()
     } else {
         myExp[myExp.length -1] = myExp[myExp.length -1].substring(0, myExp[myExp.length -1].length -1);
     }
