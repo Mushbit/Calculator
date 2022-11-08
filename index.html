@@ -9,20 +9,20 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-<div class="background">
-</div>
 
     <div class="container">
         
+
         <div class="top">
             <div class="display"></div>
         </div>
+
         <div class="numPad">
             <div class="padRow1">
-                <button class="btn" type="button" value="*">*</button>
-                <button class="btn" type="button" value="/">/</button>
                 <button class="allClearBtn" type="reset" value="Escape">AC</button>
                 <button class="clearBtn" type="reset" value="Backspace">C</button>
+                <button class="btn" type="button" value="*">*</button>
+                <button class="btn" type="button" value="/">/</button>
             </div>
             <div class="padRow2">
                 <button class="btn" type="button" value="1">1</button>
@@ -36,16 +36,31 @@
                 <button class="btn" type="button" value="6">6</button>
                 <button class="btn" type="button" value="-">-</button>
             </div>
+
             <div class="padRow4">
-                <button class="btn" type="button" value="7">7</button>
-                <button class="btn" type="button" value="8">8</button>
-                <button class="btn" type="button" value="9">9</button>
-                <button id="zero" class="btn" type="button" value="0">0</button>
-                <button class="btn" type="button" value=".">.</button>
-                    <button class="returnBtn" type="submit" value="=">=</button>
+                <div class="subRow">
+                    <div class="seven89">
+                        <button class="btn" type="button" value="7">7</button>
+                        <button class="btn" type="button" value="8">8</button>
+                        <button class="btn" type="button" value="9">9</button>
+                    </div>
+                    <div class="zeroPeriod">
+                        <button id="zero" class="btn" type="button" value="0">0</button>
+                        <button class="btn" type="button" value=".">.</button>
+                    </div>
                 </div>
+
+                <div class="return">
+                    <button class="returnBtn" type="button" value="=">=</button>
+                </div>
+
+            </div>
         </div>
+
+
     </div>
     
+    <div>Max Vogel 2022 </div>
+
 </body>
 </html>
