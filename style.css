@@ -2,7 +2,7 @@
 html {
     font-size: 16px;
 }
-@media (max-width: 420px), (max-height: 400px) {
+@media (max-width: 420px), (max-height: 420px) {
     html {
         font-size: 10px;
     }
@@ -16,6 +16,7 @@ html {
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     /* min-width: 100vw; */
@@ -25,7 +26,8 @@ body {
     background-color:  #d99392;
     background-position: 0 0, 50px 50px;
     background-size: 100px 100px;
-    border: 2px solid red;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 }
 
 .container {
@@ -34,11 +36,11 @@ body {
     flex-direction: column;
     /* align-items: center; */
     padding: 1.5rem 1.5rem;
-    margin: 1.2rem 2rem 2rem 1.2rem;
+    margin: auto 2rem auto 1.2rem;
     gap: 1.2rem;
     border-radius: 15px;
     box-shadow: 1.2rem 1.2rem black;
-    /* min-height: 1rem; */
+    min-width: 20rem;
     flex-basis: 20rem;
 
 }
@@ -58,7 +60,6 @@ body {
     background-color: #0d652d;
     box-shadow: inset 5px 5px  #08411c;
     flex-direction: row-reverse;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 2rem;
     font-weight: 600;
 }
@@ -113,7 +114,6 @@ body {
     background-color: #545454;
     color: #ffffff;
     cursor: pointer;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     border: none;
@@ -155,4 +155,28 @@ button.returnBtn:hover {
 .numPad > * button:active {
     box-shadow: #1a1a1a 1px 1px 0 inset;
     transform: translate(1.5px, 1.5px);
+}
+footer {
+    display: flex;
+    background-color: rgb(131, 198, 192);
+    padding: 0.4rem 0;
+    min-width: 100%;
+    font-size: 0.8rem;
+    justify-content: center;
+}
+footer a:link {
+    color: black;
+    text-decoration: none;
+}
+
+footer a:visited {
+    color: black;
+}
+
+footer a:hover {
+text-decoration: underline;
+}
+
+footer a:active {
+    text-decoration: underline;
 }
