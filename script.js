@@ -40,6 +40,8 @@ function pushKey(key) {
         } else {
             myExp[myExp.length - 1] += key;
         }
+    } else {
+        alert('Error, Expression too long')
     }
     refreshDisplay()
     console.log(myExp)
