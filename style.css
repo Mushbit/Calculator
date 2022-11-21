@@ -8,6 +8,12 @@ html {
     }
 }
 
+@media (max-width: 260px), (max-height: 260px) {
+    html {
+        font-size: 7px;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -39,7 +45,7 @@ body {
     padding: 1.5rem 1.5rem;
     margin: auto 2rem auto 1.2rem;
     gap: 1.2rem;
-    border-radius: 15px;
+    border-radius: 1rem;
     box-shadow: 1.2rem 1.2rem black;
     min-width: 20rem;
     flex-basis: 20rem;
@@ -52,7 +58,7 @@ body {
 .display {
     display: flex;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 1rem;
     height: 6rem;
     text-overflow: ellipsis;
     white-space: wrap;
@@ -62,7 +68,7 @@ body {
     width: 17rem;
     padding: 0 10%;
     background-color: #0d652d;
-    box-shadow: inset 5px 5px  #08411c;
+    box-shadow: inset 0.3rem 0.3rem #08411c;
     flex-direction: row-reverse;
     font-size: 1.5rem;
     font-weight: 600;
