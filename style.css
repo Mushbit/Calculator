@@ -19,10 +19,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* min-width: 100vw; */
     min-height: 100vh;
-        background-image: radial-gradient(#fafafa 20%, transparent 20%),
-    radial-gradient(#fafafa 20%, transparent 20%);
+    background-image: radial-gradient(#fafafa 20%, transparent 20%),
+        radial-gradient(#fafafa 20%, transparent 20%);
     background-color:  #d99392;
     background-position: 0 0, 50px 50px;
     background-size: 100px 100px;
@@ -30,11 +29,13 @@ body {
 
 }
 
+
+/* Main Box */
+
 .container {
     display: flex;
     background-color: #272727;
     flex-direction: column;
-    /* align-items: center; */
     padding: 1.5rem 1.5rem;
     margin: auto 2rem auto 1.2rem;
     gap: 1.2rem;
@@ -52,32 +53,31 @@ body {
     display: flex;
     align-items: center;
     border-radius: 15px;
-    min-height: 5rem;
+    height: 6rem;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    overflow: auto;
     /* flex-grow: 1; */
     /* flex-shrink: 0; */
-    /* flex-basis: 100%; */
+    width: 17rem;
     padding: 0 10%;
     background-color: #0d652d;
     box-shadow: inset 5px 5px  #08411c;
     flex-direction: row-reverse;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
 }
+
+
 
 .numPad {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    /* flex-shrink: 1; */
-    /* flex-basis: 20rem; */
-    /* flex: 1; */
 }
+
 
 /* Rows */
-
-.padRow4 {
-    /* display: flex; */
-}
 
 .numPad > * {
     display: flex;
@@ -98,10 +98,8 @@ body {
 .seven89,
 .zeroPeriod,
 .return {
-    /* flex: 0; */
     display: flex;
     gap: 0.75rem;
-    /* flex-basis: 75%; */
 }
 
 .return {
@@ -131,8 +129,6 @@ body {
 
 button.returnBtn{
     background-color: rgba(211, 103, 37, 0.847);
-    /* min-height: rem; */
-    /* flex-shrink: 1; */
 }
 
 
@@ -156,21 +152,28 @@ button.returnBtn:hover {
     box-shadow: #1a1a1a 1px 1px 0 inset;
     transform: translate(1.5px, 1.5px);
 }
+
+
+/* Footer */
+
 footer {
+    color: white;
     display: flex;
     background-color: rgb(131, 198, 192);
     padding: 0.4rem 0;
     min-width: 100%;
     font-size: 0.8rem;
+    font-weight: 500;
     justify-content: center;
 }
+
 footer a:link {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
 footer a:visited {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 

@@ -1,37 +1,11 @@
-const myExp = [0];
+let myExp = [0];
 
 let display = document.querySelector('.display')
-//document.addEventListener('keydown', e => {
-//    console.log(e.key)
-//})
-const buttons = document.querySelectorAll('.btn');
-buttons.forEach(btn => {
-    btn.addEventListener('click', e => {
-        console.log(e.target.value === '-')
-        console.log(!(lastInputIsNaN(2)))
-        console.log(myExp.length)
-        if (e.target.value === '.' && myExp.length === 0) {
-            myExp.push('0' + e.target.value)
-        } else if (e.target.value === '.' && !(lastInputIsNaN(1)) && !(myExp[myExp.length -1].includes('.'))) {
-            myExp[myExp.length - 1] += e.target.value;
-        } else if (e.target.value === '-' && (!(lastInputIsNaN(2)) || myExp.length === 0)) {
-            myExp.push(e.target.value);
-        } else if (myExp[myExp.length - 1] === '-' && !(currentInputIsOperator(e)) && lastInputIsNaN(2)) {
-            myExp[myExp.length - 1] += e.target.value;
-        } else if ( lastInputIsNaN(1) || currentInputIsOperator(e)) {
-            if (!(currentInputIsOperator(e) && lastInputIsNaN(1)) && e.target.value != '.') myExp.push(e.target.value)
-        } else if (typeof(myExp[0]) === 'number' && myExp[1] === undefined){
-            allClear();
-            myExp.push(e.target.value);
-        } else {
-            myExp[myExp.length - 1] += e.target.value;
-        }
-        
-        refreshDisplay()
-        console.log(myExp)
 
-    })
-})
+document.addEventListener('keydown', e => console.log(e.key))
+
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(btn => btn.addEventListener('click', e => pushKey(e.target.value)))
 
 
 const buttonAllClear = document.querySelector('.allClearBtn');
@@ -45,13 +19,38 @@ buttonReturn.addEventListener('click',  () => {
     if (!(lastInputIsNaN(1))) operate()
 })
 
+function pushKey(key) {
+    console.log(key === '-')
+    console.log(!(lastInputIsNaN(2)))
+    console.log(myExp.length)
+    if (checkOutputLength() < 35) {
+        if (key === '.' && myExp.length === 0) {
+            myExp.push('0' + key)
+        } else if (key === '.' && !(lastInputIsNaN(1)) && !(myExp[myExp.length -1].includes('.'))) {
+            myExp[myExp.length - 1] += key;
+        } else if (key === '-' && (!(lastInputIsNaN(2)) || myExp.length === 0)) {
+            myExp.push(key);
+        } else if (myExp[myExp.length - 1] === '-' && !(currentInputIsOperator(key)) && lastInputIsNaN(2)) {
+            myExp[myExp.length - 1] += key;
+        } else if ( lastInputIsNaN(1) || currentInputIsOperator(key)) {
+            if (!(currentInputIsOperator(key) && lastInputIsNaN(1)) && key != '.') myExp.push(key)
+        } else if (typeof(myExp[0]) === 'number' && myExp[1] === undefined){
+            allClear();
+            myExp.push(key);
+        } else {
+            myExp[myExp.length - 1] += key;
+        }
+    }
+    refreshDisplay()
+    console.log(myExp)
+}
 
 function lastInputIsNaN(n) {
     return isNaN(+myExp[myExp.length - n]);
 }
 
-function currentInputIsOperator(e) {
-    return isNaN(e.target.value);
+function currentInputIsOperator(key) {
+    return isNaN(key);
 }
 function add(a, b) {
     return a + b;
@@ -89,6 +88,19 @@ function refreshDisplay() {
     display.textContent = myExp.join(' ');
 }
 
+
+function checkOutputLength() {
+    let count = 0;
+    myExp.forEach(el => {
+        count += 0.5;
+        for (let i = 0; i < el.length; i++) {
+            count += 1;
+        }
+    })
+    console.log(count)
+    return count;
+}
+
 function operate() {
 
     let i = 0;
@@ -119,7 +131,7 @@ function operate() {
             console.log(myExp)
         }
     }
-    
+    myExp[0] = Math.round(myExp * 100000) / 100000;
     refreshDisplay()
 }
 
@@ -127,6 +139,7 @@ function allClear() {
     myExp.splice(0, myExp.length,);
     refreshDisplay()
 }
+
 function clear() {
     if (myExp[myExp.length -1] === '') {
         myExp.pop()   
@@ -135,6 +148,10 @@ function clear() {
         myExp.pop()
     } else {
         myExp[myExp.length -1] = myExp[myExp.length -1].substring(0, myExp[myExp.length -1].length -1);
+        if (myExp[myExp.length -1] === '') {
+            myExp.pop();
+        }
     }
+    console.log(myExp)
     refreshDisplay()
 }
