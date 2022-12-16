@@ -3,7 +3,7 @@ A Simple Calculator webApp
 
 Created with vanilla JS, HTML and CSS
 
-https://codepen.io/Just-a-Bird/pen/OJwLMQq
+https://codepen.io/Just-a-Bird/pen/JjBPGjb
 
 # Features
  - It is currently only working with mouse clicks, but may add keyboard functionality at a later date
